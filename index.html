@@ -1,0 +1,2320 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>MÉLIE — Mary Jane Dress-up Studio</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&family=Noto+Sans+TC:wght@400;500;600;700&display=swap');
+
+:root {
+  --cream: #fff9f1;
+  --paper: #f7eee4;
+  --pink: #f1dadd;
+  --rose: #a64f60;
+  --wine: #793848;
+  --brown: #604638;
+  --ink: #382b27;
+  --muted: #9b8277;
+  --line: #e8d8ca;
+  --gold: #d4af37;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--cream); color: var(--ink); font-family: 'DM Sans', 'Noto Sans TC', sans-serif; overflow-x: hidden; }
+button { font: inherit; cursor: pointer; border: none; outline: none; }
+a { color: inherit; text-decoration: none; }
+
+/* Topbar Header */
+.topbar {
+  height: 74px;
+  padding: 0 5vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--line);
+  background: rgba(255, 249, 241, 0.94);
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  backdrop-filter: blur(12px);
+}
+.logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 25px;
+  letter-spacing: 0.18em;
+  color: var(--wine);
+  font-weight: 600;
+}
+.logo small {
+  display: block;
+  font: 9px 'DM Sans';
+  letter-spacing: 0.28em;
+  text-align: center;
+  color: var(--muted);
+  margin-top: 2px;
+}
+nav { display: flex; gap: 28px; font-size: 10px; letter-spacing: 0.17em; color: var(--brown); font-weight: 600; }
+nav a { padding: 10px 0; position: relative; }
+nav a:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 3px;
+  width: 0;
+  height: 1px;
+  background: var(--rose);
+  transition: 0.3s;
+}
+nav a:hover:after { width: 100%; }
+.menu-btn { display: none; background: none; border: 0; color: var(--wine); font-size: 24px; }
+
+/* Hero Section */
+.hero {
+  min-height: 720px;
+  padding: 60px 7vw 60px;
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  align-items: center;
+  gap: 3vw;
+  position: relative;
+  overflow: hidden;
+}
+.hero:before {
+  content: "";
+  position: absolute;
+  inset: 22px;
+  border: 1px solid #ead8ce;
+  pointer-events: none;
+}
+.hero:after {
+  content: "✿  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ·  ✿";
+  position: absolute;
+  bottom: 15px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  color: #c9959b;
+  letter-spacing: 0.5em;
+  font-size: 13px;
+}
+.hero-copy { position: relative; z-index: 2; padding-left: 2vw; }
+.eyebrow { font-size: 10px; letter-spacing: 0.28em; color: var(--rose); text-transform: uppercase; font-weight: 700; }
+.hero h1 {
+  font: clamp(48px, 5.5vw, 80px)/1.05 'Playfair Display', serif;
+  font-weight: 500;
+  margin: 22px 0 18px;
+  color: var(--wine);
+}
+.hero h1 em { font-style: italic; font-weight: 400; color: var(--rose); }
+.hero p { max-width: 380px; line-height: 1.8; color: var(--muted); font-size: 13px; }
+.primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--wine);
+  color: #fff8f2;
+  padding: 16px 26px;
+  border: 0;
+  border-radius: 2px;
+  margin-top: 26px;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  font-weight: 600;
+  transition: 0.3s ease;
+  box-shadow: 0 8px 20px rgba(121, 56, 72, 0.15);
+}
+.primary:hover { background: var(--rose); transform: translateY(-2px); box-shadow: 0 12px 25px rgba(166, 79, 96, 0.25); }
+.scroll-note { margin-top: 50px; font-size: 9px; letter-spacing: 0.24em; color: #b39b90; }
+
+.hero-model {
+  height: 520px;
+  position: relative;
+  z-index: 1;
+  border: 1px solid #eadbd1;
+  background: radial-gradient(ellipse at 50% 50%, #ffffff 0%, #fbf2e9 60%, #f4e6dc 100%);
+  box-shadow: 0 20px 45px rgba(128, 92, 75, 0.08);
+  border-radius: 4px;
+}
+.hero-model:before {
+  content: "MÉLIE";
+  position: absolute;
+  right: 25px;
+  top: 15px;
+  font: italic 110px 'Playfair Display';
+  color: rgba(255, 255, 255, 0.75);
+  pointer-events: none;
+  user-select: none;
+}
+.hero-model canvas { width: 100%; height: 100%; display: block; touch-action: none; cursor: grab; }
+.hero-model canvas:active { cursor: grabbing; }
+.model-label {
+  position: absolute;
+  left: 22px;
+  bottom: 18px;
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  color: var(--muted);
+  background: rgba(255,255,255,0.7);
+  padding: 4px 10px;
+  border-radius: 12px;
+  backdrop-filter: blur(4px);
+}
+
+/* Sections General */
+.section { padding: 90px 7vw; position: relative; }
+.section-head { text-align: center; margin-bottom: 48px; }
+.section-head .eyebrow { margin-bottom: 10px; }
+.section-head h2 { font: clamp(34px, 4vw, 52px) 'Playfair Display', serif; color: var(--wine); font-weight: 500; margin: 0; }
+.section-head p { font-size: 13px; color: var(--muted); line-height: 1.8; margin-top: 8px; }
+
+/* Customizer Studio Section */
+.custom { background: #f7eee7; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.studio {
+  max-width: 1350px;
+  margin: auto;
+  position: relative;
+}
+
+/* Immersive Studio Layout Inspired by NOOMO Style */
+.noomo-studio {
+  position: relative;
+  width: 100%;
+  height: 680px;
+  background: radial-gradient(circle at 50% 45%, #ffffff 0%, #faf3ec 45%, #e9dcd2 100%);
+  border: 1px solid #eadbd1;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(121, 56, 72, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* 3D Canvas inside NOOMO Studio */
+.viewer-canvas-wrap {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+.viewer-canvas-wrap canvas { width: 100%; height: 100%; display: block; touch-action: none; cursor: grab; }
+.viewer-canvas-wrap canvas:active { cursor: grabbing; }
+
+/* Overlay UI Components */
+.studio-ui-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+  padding: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Left Category Navigation Menu (NOOMO Style Glass Buttons) */
+.left-nav-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  pointer-events: auto;
+  width: 160px;
+}
+.noomo-menu-btn {
+  background: rgba(255, 250, 246, 0.75);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(232, 216, 202, 0.8);
+  padding: 14px 18px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  color: var(--brown);
+  text-transform: uppercase;
+  border-radius: 4px;
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  text-align: left;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+}
+.noomo-menu-btn:hover, .noomo-menu-btn.active {
+  background: rgba(255, 255, 255, 0.95);
+  border-color: var(--rose);
+  color: var(--wine);
+  font-weight: 700;
+  transform: translateX(6px);
+  box-shadow: 0 6px 20px rgba(166, 79, 96, 0.15);
+}
+
+/* Right Grid Palette Container (NOOMO Style Square Grid) */
+.right-palette-panel {
+  background: rgba(255, 250, 246, 0.75);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(232, 216, 202, 0.8);
+  border-radius: 8px;
+  padding: 20px;
+  width: 280px;
+  pointer-events: auto;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+  max-height: 560px;
+  overflow-y: auto;
+}
+.palette-title {
+  font: italic 18px 'Playfair Display', serif;
+  color: var(--wine);
+  margin-bottom: 14px;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Square Color/Option Grid */
+.noomo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.grid-item-sq {
+  aspect-ratio: 1;
+  border-radius: 6px;
+  border: 2px solid #ffffff;
+  outline: 1px solid #e2d2c7;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: cover;
+}
+.grid-item-sq:hover {
+  transform: scale(1.08);
+  outline-color: var(--rose);
+  z-index: 2;
+}
+.grid-item-sq.active {
+  outline: 2px solid var(--wine);
+  outline-offset: 2px;
+  transform: scale(1.05);
+}
+.grid-item-sq .sq-label {
+  font-size: 9px;
+  letter-spacing: 0.05em;
+  color: var(--brown);
+  text-align: center;
+  padding: 4px;
+}
+
+/* Bottom Floating Action Bar */
+.bottom-action-bar {
+  position: absolute;
+  bottom: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 15;
+  display: flex;
+  gap: 12px;
+  pointer-events: auto;
+}
+.noomo-action-btn {
+  background: #18181a;
+  color: #fff;
+  padding: 14px 28px;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  font-weight: 600;
+  border-radius: 4px;
+  transition: all 0.3s;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.noomo-action-btn:hover {
+  background: var(--wine);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(121, 56, 72, 0.35);
+}
+
+.noomo-action-btn.secondary {
+  background: rgba(255, 250, 246, 0.9);
+  color: var(--wine);
+  border: 1px solid var(--rose);
+  backdrop-filter: blur(8px);
+}
+.noomo-action-btn.secondary:hover {
+  background: #f7e8e8;
+}
+
+/* Modal Popup Dialog Style */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(56, 43, 39, 0.55);
+  backdrop-filter: blur(8px);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+.modal-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+.modal-card {
+  background: #fffaf5;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  max-width: 520px;
+  width: 100%;
+  padding: 28px 24px;
+  position: relative;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+  transform: translateY(20px);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  max-height: 90vh;
+  overflow-y: auto;
+}
+.modal-overlay.open .modal-card {
+  transform: translateY(0);
+}
+.modal-close {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  background: #f1dadd;
+  border: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  color: var(--wine);
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.modal-title { font: 24px 'Playfair Display', serif; color: var(--wine); margin: 0 0 6px; }
+.size-selector { display: flex; gap: 8px; margin: 12px 0 18px; flex-wrap: wrap; }
+.size-btn { border: 1px solid var(--line); background: #fff; padding: 8px 12px; font-size: 11px; border-radius: 4px; }
+.size-btn.active { border-color: var(--rose); background: #f7e8e8; color: var(--wine); font-weight: 700; }
+
+.channel-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px;
+  border: 1px solid var(--line);
+  background: #fff;
+  border-radius: 6px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: all 0.25s;
+}
+.channel-card:hover {
+  border-color: var(--rose);
+  background: #fcf4f5;
+  transform: translateX(4px);
+}
+.channel-icon { font-size: 22px; }
+
+/* Pink & White Dice Random Button */
+.dice-btn {
+  background: linear-gradient(135deg, #fce4e8 0%, #ffffff 100%) !important;
+  border: 1px solid #f0b6c2 !important;
+  color: var(--wine) !important;
+  box-shadow: 0 4px 12px rgba(240, 182, 194, 0.3);
+}
+.dice-btn:hover {
+  background: linear-gradient(135deg, #f7d4dc 0%, #fff0f3 100%) !important;
+  border-color: var(--rose) !important;
+  box-shadow: 0 6px 16px rgba(166, 79, 96, 0.25);
+}
+.dice-icon {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.dice-btn:hover .dice-icon {
+  transform: rotate(180deg) scale(1.15);
+}
+
+/* Collection Grid */
+.collection-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; max-width: 1150px; margin: auto; }
+.product {
+  background: #fffaf5;
+  border: 1px solid var(--line);
+  padding: 16px;
+  transition: 0.35s ease;
+  cursor: pointer;
+  border-radius: 4px;
+}
+.product:hover { transform: translateY(-6px); box-shadow: 0 18px 40px rgba(107, 69, 51, 0.1); border-color: var(--rose); }
+.product-art {
+  height: 230px;
+  background: linear-gradient(145deg, #f6e9e1, #fffaf6);
+  display: grid;
+  place-items: center;
+  position: relative;
+  overflow: hidden;
+  border-radius: 2px;
+}
+.shoe-icon-svg { width: 110px; height: 110px; fill: var(--wine); opacity: 0.85; filter: drop-shadow(0 8px 12px rgba(84,55,44,0.15)); transition: transform 0.3s; }
+.product:hover .shoe-icon-svg { transform: scale(1.08) rotate(-4deg); }
+.product h3 { font: 21px 'Playfair Display', serif; color: var(--wine); margin: 18px 5px 6px; }
+.product p { font-size: 11px; color: var(--muted); margin: 0 5px 12px; }
+.product .price { font-size: 11px; color: var(--brown); margin: 0 5px 8px; font-weight: 600; letter-spacing: 0.05em; }
+
+/* Styling Journal */
+.styling { background: #f5e9e3; }
+.style-grid { max-width: 1050px; margin: auto; display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 28px; }
+.style-card { min-height: 360px; position: relative; overflow: hidden; background: #e7d5ca; border: 1px solid #e4d2c7; border-radius: 4px; }
+.style-card:nth-child(2) { margin-top: 60px; background: #eadde0; }
+.style-card .style-bg {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #ead8cb, #f9f0e8);
+  display: grid;
+  place-items: center;
+  font: italic 82px 'Playfair Display', serif;
+  color: #b78c86;
+}
+.style-card:nth-child(2) .style-bg { background: linear-gradient(135deg, #e8d7dc, #fbf2ef); color: #b77c8a; }
+.style-caption { position: absolute; bottom: 22px; left: 24px; background: rgba(255, 250, 240, 0.92); padding: 16px 22px; border-radius: 2px; backdrop-filter: blur(4px); }
+.style-caption b { display: block; font: 22px 'Playfair Display', serif; color: var(--wine); }
+.style-caption span { font-size: 9px; letter-spacing: 0.18em; color: var(--muted); font-weight: 600; }
+
+/* Interactive Dress-up Game Section */
+.dressup-section { background: #fdf7f2; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.dressup-container {
+  max-width: 1100px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 30px;
+  align-items: center;
+  background: #fffaf5;
+  border: 1px solid #eadbd1;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(121, 56, 72, 0.05);
+}
+.doll-stage {
+  background: radial-gradient(circle at 50% 50%, #ffffff 0%, #fbf2e9 70%, #f4e4da 100%);
+  border: 1px solid #ead5c8;
+  border-radius: 6px;
+  height: 480px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-shadow: inset 0 0 20px rgba(0,0,0,0.03);
+}
+.doll-canvas-wrap {
+  width: 240px;
+  height: 440px;
+  position: relative;
+  filter: drop-shadow(0 12px 20px rgba(121, 56, 72, 0.12));
+}
+.doll-canvas-wrap svg {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.dressup-controls { display: flex; flex-direction: column; gap: 16px; }
+.dressup-tabs { display: flex; gap: 8px; flex-wrap: wrap; border-bottom: 1px solid var(--line); padding-bottom: 10px; }
+.dressup-tab {
+  border: 1px solid var(--line);
+  background: #fff;
+  color: var(--brown);
+  padding: 6px 12px;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  border-radius: 20px;
+  transition: all 0.2s;
+}
+.dressup-tab.active, .dressup-tab:hover {
+  background: var(--wine);
+  color: #fff;
+  border-color: var(--wine);
+}
+.items-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  max-height: 240px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+.item-card {
+  border: 1px solid var(--line);
+  background: #fff;
+  padding: 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  text-align: center;
+  font-size: 10px;
+  color: var(--brown);
+  transition: all 0.25s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+.item-card:hover, .item-card.active {
+  border-color: var(--rose);
+  background: #fdf2f4;
+  transform: translateY(-2px);
+  color: var(--wine);
+  font-weight: bold;
+}
+.item-icon { font-size: 22px; }
+
+.polaroid-card {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%) scale(0.8) rotate(-3deg);
+  background: #fff;
+  padding: 16px 16px 45px;
+  border-radius: 4px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+  z-index: 50;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  text-align: center;
+  width: 260px;
+}
+.polaroid-card.show {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(-50%, -50%) scale(1) rotate(0deg);
+}
+.polaroid-img {
+  background: #faf2ea;
+  height: 260px;
+  border: 1px solid #eee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.polaroid-caption {
+  font: italic 18px 'Playfair Display', serif;
+  color: var(--wine);
+  margin-top: 14px;
+}
+
+/* About Section */
+.about { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; max-width: 1000px; margin: auto; }
+.about-mark {
+  height: 320px;
+  border: 1px solid var(--line);
+  background: linear-gradient(135deg, #f7e8e4, #fffaf4);
+  display: grid;
+  place-items: center;
+  font: italic 110px 'Playfair Display', serif;
+  color: #c38e95;
+  position: relative;
+  border-radius: 4px;
+}
+.about-mark:after { content: "✿  LACE & STEP  ✿"; position: absolute; bottom: 20px; font-size: 9px; letter-spacing: 0.3em; color: var(--rose); font-weight: 600; }
+.about h2 { font: 42px 'Playfair Display', serif; color: var(--wine); font-weight: 500; margin-top: 0; }
+.about p { font-size: 13px; line-height: 2; color: var(--muted); }
+
+/* Footer */
+footer {
+  padding: 40px 7vw;
+  background: #604638;
+  color: #f8eee5;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+}
+
+/* Notification Toast */
+.toast {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translate(-50%, 20px);
+  background: var(--wine);
+  color: #fff;
+  padding: 12px 24px;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  border-radius: 30px;
+  opacity: 0;
+  transition: all 0.3s ease;
+  z-index: 100;
+  pointer-events: none;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.18);
+}
+.toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .studio { grid-template-columns: 1fr 1fr; }
+  .viewer { grid-column: 1 / -1; grid-row: 1; }
+  .panel.left { grid-column: 1; }
+  .panel.right { grid-column: 2; }
+}
+@media (max-width: 820px) {
+  .hero { grid-template-columns: 1fr; min-height: auto; text-align: center; }
+  .hero-copy { padding-left: 0; }
+  .hero p { margin: auto; }
+  .hero-model { height: 400px; }
+  .collection-grid { grid-template-columns: repeat(2, 1fr); }
+  .style-grid, .about { grid-template-columns: 1fr; }
+  .style-card:nth-child(2) { margin-top: 0; }
+}
+@media (max-width: 600px) {
+  .topbar { height: 64px; padding: 0 5vw; }
+  nav { display: none; position: absolute; top: 64px; left: 0; right: 0; background: var(--cream); padding: 20px; flex-direction: column; gap: 14px; border-bottom: 1px solid var(--line); }
+  nav.open { display: flex; }
+  .menu-btn { display: block; }
+  .hero { padding: 40px 5vw 50px; }
+  .hero-model { height: 340px; }
+  .section { padding: 60px 5vw; }
+  .studio { grid-template-columns: 1fr; }
+  .viewer { grid-column: 1; grid-row: 1; }
+  .panel.left, .panel.right { grid-column: 1; }
+  .viewer canvas { min-height: 420px; }
+  .collection-grid { grid-template-columns: 1fr; gap: 16px; }
+  footer { gap: 16px; flex-direction: column; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- Header Bar -->
+<header class="topbar">
+  <a class="logo" href="#home">MÉLIE<small>MARY JANE STUDIO</small></a>
+  <nav id="nav">
+    <a href="#home">HOME</a>
+    <a href="#customize">CUSTOMIZE</a>
+    <a href="#collection">COLLECTION</a>
+    <a href="#styling">STYLING</a>
+    <a href="#about">ABOUT</a>
+  </nav>
+  <button class="menu-btn" id="menuBtn" aria-label="Toggle navigation">☰</button>
+</header>
+
+<!-- Hero Section with Interactive 3D Model -->
+<section class="hero" id="home">
+  <div class="hero-copy">
+    <div class="eyebrow">A LITTLE STEP, A LITTLE DREAM</div>
+    <h1>Find Your<br><em>Lovely Pair.</em></h1>
+    <p>一雙鞋，一種心情。自由搭配鞋面、鞋帶、鞋底與金屬鞋扣，打造專屬日系瑪莉珍鞋。</p>
+    <a class="primary" href="#customize">START DESIGNING <span>↗</span></a>
+    <div class="scroll-note">SCROLL TO EXPLORE　↓</div>
+  </div>
+  <div class="hero-model" id="heroCanvasWrap">
+    <div class="model-label">01 / SIGNATURE DOUBLE STRAP</div>
+  </div>
+</section>
+
+<!-- Customizer Studio Section -->
+<section class="section custom" id="customize">
+  <div class="section-head">
+    <div class="eyebrow">YOUR SHOE, YOUR STORY</div>
+    <h2>Customize Your Shoes</h2>
+    <p>藝廊級 3D 沉浸式體驗，點擊左側選單與右側質感藝廊進行專屬訂製。</p>
+  </div>
+
+  <div class="studio">
+    <div class="noomo-studio" id="noomoStudio">
+      <!-- 3D Canvas Background -->
+      <div class="viewer-canvas-wrap" id="studioCanvasWrap"></div>
+
+      <!-- Studio Floating UI Overlay -->
+      <div class="studio-ui-layer">
+        <!-- Left Categories Navigation (NOOMO Style) -->
+        <nav class="left-nav-menu" id="leftNavMenu">
+          <button class="noomo-menu-btn active" data-tab="style">SILHOUETTE</button>
+          <button class="noomo-menu-btn" data-tab="part">PART SELECT</button>
+          <button class="noomo-menu-btn" data-tab="color">COLOR PALETTE</button>
+          <button class="noomo-menu-btn" data-tab="material">MATERIAL</button>
+        </nav>
+
+        <!-- Right Visual Palette Grid Panel -->
+        <aside class="right-palette-panel" id="rightPalettePanel">
+          <div class="palette-title">
+            <span id="paletteCategoryTitle">COLOR PALETTE</span>
+            <small style="font-size:9px; color:var(--muted);" id="activePartName">UPPER</small>
+          </div>
+
+          <!-- Dynamic Options Grid -->
+          <div class="noomo-grid" id="noomoGridOptions">
+            <!-- Populated via JavaScript -->
+          </div>
+
+          <!-- Current Customization Live Summary -->
+          <div class="summary" id="summary" style="margin-top:10px; padding-top:10px; font-size:10px;">
+            <!-- Live Summary Text -->
+          </div>
+        </aside>
+      </div>
+
+      <!-- Bottom Center Floating Action Buttons -->
+      <div class="bottom-action-bar">
+        <button id="randomBtn" class="noomo-action-btn secondary">
+          <svg class="dice-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:14px; height:14px;">
+            <rect x="2" y="2" width="20" height="20" rx="5" fill="#f1dadd" stroke="#a64f60" stroke-width="1.8"/>
+            <circle cx="7.5" cy="7.5" r="1.8" fill="#793848"/>
+            <circle cx="16.5" cy="7.5" r="1.8" fill="#793848"/>
+            <circle cx="12" cy="12" r="1.8" fill="#a64f60"/>
+            <circle cx="7.5" cy="16.5" r="1.8" fill="#793848"/>
+            <circle cx="16.5" cy="16.5" r="1.8" fill="#793848"/>
+          </svg>
+          DICE SHIFT
+        </button>
+        <button id="saveBtn" class="noomo-action-btn">FINISH & SAVE ♡</button>
+        <button id="buyBtn" class="noomo-action-btn" style="background:var(--rose);">ORDER PAIR ✦</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Purchase Options Modal -->
+<div class="modal-overlay" id="purchaseModal">
+  <div class="modal-card">
+    <button class="modal-close" id="modalCloseBtn">✕</button>
+    <div class="eyebrow" style="margin-bottom: 4px;">CUSTOM ORDER</div>
+    <h3 class="modal-title">Ready to Step in Style?</h3>
+    <p style="font-size: 11px; color: var(--muted); margin-bottom: 16px;">
+      將你的專屬設計直接轉化為手工打造鞋款，選取尺寸與便利購買管道：
+    </p>
+
+    <!-- Size Selection -->
+    <div class="control-label">01 / Choose Shoe Size (EU)</div>
+    <div class="size-selector" id="sizeSelector">
+      <button class="size-btn">35 (22.5cm)</button>
+      <button class="size-btn active">36 (23.0cm)</button>
+      <button class="size-btn">37 (23.5cm)</button>
+      <button class="size-btn">38 (24.0cm)</button>
+      <button class="size-btn">39 (24.5cm)</button>
+      <button class="size-btn">40 (25.0cm)</button>
+    </div>
+
+    <!-- Additional Accessories -->
+    <div class="control-label" style="margin-top: 14px;">02 / Add Pair Accessories (Optional)</div>
+    <div style="font-size: 11px; color: var(--brown); margin-bottom: 16px; display:flex; flex-direction:column; gap:8px;">
+      <label style="display:flex; align-items:center; gap:8px; cursor:pointer;">
+        <input type="checkbox" id="addSocks" checked style="accent-color:var(--rose);"> 日系蕾絲木耳邊棉襪 (+NT$ 180)
+      </label>
+      <label style="display:flex; align-items:center; gap:8px; cursor:pointer;">
+        <input type="checkbox" id="addRibbon" style="accent-color:var(--rose);"> 替換式絲絨復古緞帶鞋帶 (+NT$ 120)
+      </label>
+    </div>
+
+    <!-- Purchase Channels -->
+    <div class="control-label">03 / Select Order Channel</div>
+    
+    <div class="channel-card" id="channelOnline">
+      <div class="channel-icon">🛍️</div>
+      <div style="flex:1;">
+        <strong style="font-size: 12px; color: var(--wine);">線上即時專屬結帳</strong>
+        <div style="font-size: 10px; color: var(--muted);">支持 信用卡 / Apple Pay / LINE Pay (免運優惠)</div>
+      </div>
+      <span style="font-size: 12px; color: var(--rose);">➔</span>
+    </div>
+
+    <div class="channel-card" id="channelLine">
+      <div class="channel-icon">💬</div>
+      <div style="flex:1;">
+        <strong style="font-size: 12px; color: var(--wine);">LINE 1對1 專人訂製諮詢</strong>
+        <div style="font-size: 10px; color: var(--muted);">傳送此 3D 設計圖給造型師，享受免費量腳建議</div>
+      </div>
+      <span style="font-size: 12px; color: var(--rose);">➔</span>
+    </div>
+
+    <div class="channel-card" id="channelStore">
+      <div class="channel-icon">🏬</div>
+      <div style="flex:1;">
+        <strong style="font-size: 12px; color: var(--wine);">預約實體概念店試穿</strong>
+        <div style="font-size: 10px; color: var(--muted);">台北赤峰店 / 台中勤美店 現場試穿皮革與軟墊</div>
+      </div>
+      <span style="font-size: 12px; color: var(--rose);">➔</span>
+    </div>
+
+  </div>
+</div>
+
+<!-- Collection Section -->
+<section class="section" id="collection">
+  <div class="section-head">
+    <div class="eyebrow">THE COLLECTION</div>
+    <h2>Choose Your Pair</h2>
+    <p>從經典輪廓出發，尋找最適合你日常風格的完美鞋款。</p>
+  </div>
+  <div class="collection-grid">
+    <article class="product" data-product="classic">
+      <div class="product-art">
+        <svg class="shoe-icon-svg" viewBox="0 0 100 100">
+          <path d="M15,65 C15,65 20,45 40,42 C55,40 70,48 85,50 C90,50 92,60 88,68 C80,72 20,72 15,65 Z" />
+          <path d="M22,66 L22,80 L38,80 L38,66 Z" />
+          <path d="M42,42 C45,35 52,35 55,45" fill="none" stroke="currentColor" stroke-width="3" />
+        </svg>
+      </div>
+      <h3>Classic Mary Jane</h3>
+      <p>經典圓頭・優雅雙帶・復古中跟</p>
+      <div class="price">NT$ 2,480　→ CUSTOMIZE</div>
+    </article>
+
+    <article class="product" data-product="square">
+      <div class="product-art">
+        <svg class="shoe-icon-svg" viewBox="0 0 100 100">
+          <path d="M12,65 L22,42 L50,40 C65,40 82,50 88,52 C92,54 90,68 85,70 L12,70 Z" />
+          <path d="M18,68 L18,82 L35,82 L35,68 Z" />
+          <path d="M40,40 L45,28 L50,40" fill="none" stroke="currentColor" stroke-width="3" />
+        </svg>
+      </div>
+      <h3>Vintage Square</h3>
+      <p>復古方圓頭・俐落線條・穩重粗跟</p>
+      <div class="price">NT$ 2,680　→ CUSTOMIZE</div>
+    </article>
+
+    <article class="product" data-product="platform">
+      <div class="product-art">
+        <svg class="shoe-icon-svg" viewBox="0 0 100 100">
+          <path d="M15,55 C15,55 20,38 40,36 C55,34 70,42 85,45 C90,45 92,55 88,60 C80,62 20,62 15,55 Z" />
+          <path d="M12,62 L88,62 L86,82 L14,82 Z" />
+          <path d="M40,36 C43,26 52,26 56,36" fill="none" stroke="currentColor" stroke-width="3" />
+        </svg>
+      </div>
+      <h3>Sweet Platform</h3>
+      <p>厚底增高・圓潤修飾・日系鬆弛感</p>
+      <div class="price">NT$ 2,880　→ CUSTOMIZE</div>
+    </article>
+  </div>
+</section>
+
+<!-- Styling Journal -->
+<section class="section styling" id="styling">
+  <div class="section-head">
+    <div class="eyebrow">STYLE JOURNAL</div>
+    <h2>Wear It Your Way</h2>
+    <p>無論是浪漫裙裝或俐落長褲，瑪莉珍鞋都能輕鬆加入你的日常生活。</p>
+  </div>
+  <div class="style-grid">
+    <div class="style-card">
+      <div class="style-bg">French<br>Vintage</div>
+      <div class="style-caption"><b>French Vintage</b><span>SOFT · CLASSIC · ELEGANT</span></div>
+    </div>
+    <div class="style-card">
+      <div class="style-bg">Sweet<br>Girl</div>
+      <div class="style-caption"><b>Sweet Girl</b><span>ROMANTIC · PLAYFUL · SOFT</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- Interactive Paper Doll Dress-up Game -->
+<section class="section dressup-section" id="dressup">
+  <div class="section-head">
+    <div class="eyebrow">MINI GAME</div>
+    <h2>Mary Jane Dress-up Studio</h2>
+    <p>試試不同風格的髮型、服飾與配飾，鞋款將即時連動你剛剛在 3D Studio 設計的訂製瑪莉珍鞋！</p>
+  </div>
+
+  <div class="dressup-container">
+    <!-- Doll Canvas Stage -->
+    <div class="doll-stage">
+      <div class="doll-canvas-wrap">
+        <svg id="dollSvg" viewBox="0 0 200 400" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <!-- Skin Gradient -->
+            <radialGradient id="skinGlow" cx="50%" cy="30%" r="70%">
+              <stop offset="0%" stop-color="#fff5f0"/>
+              <stop offset="80%" stop-color="#fbe4db"/>
+              <stop offset="100%" stop-color="#f5d0c3"/>
+            </radialGradient>
+            <!-- Soft Shadow Gradient -->
+            <radialGradient id="shadowGlow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="rgba(121, 56, 72, 0.18)"/>
+              <stop offset="100%" stop-color="rgba(121, 56, 72, 0)"/>
+            </radialGradient>
+            <!-- Gold Shimmer Gradient -->
+            <linearGradient id="goldShimmer" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#fdf0a6"/>
+              <stop offset="50%" stop-color="#d4af37"/>
+              <stop offset="100%" stop-color="#aa820a"/>
+            </linearGradient>
+            <!-- Denim Pattern Texture -->
+            <linearGradient id="denimGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#4a6572"/>
+              <stop offset="100%" stop-color="#344955"/>
+            </linearGradient>
+          </defs>
+
+          <!-- Stage Soft Shadow Ground -->
+          <ellipse cx="100" cy="358" rx="65" ry="12" fill="url(#shadowGlow)" />
+
+          <!-- High-Detail Body Base (Paper Doll) -->
+          <g id="layer-body">
+            <!-- Shadow under legs -->
+            <ellipse cx="100" cy="346" rx="28" ry="6" fill="#eed5ca" opacity="0.6"/>
+
+            <!-- Legs with contour shading -->
+            <!-- Left Leg -->
+            <path d="M85,215 L82,342 Q87,346 95,342 L94,215 Z" fill="url(#skinGlow)"/>
+            <path d="M82,215 Q84,280 82,342" stroke="#ebd0c5" stroke-width="1.2" fill="none"/>
+            <!-- Right Leg -->
+            <path d="M106,215 L105,342 Q113,346 118,342 L115,215 Z" fill="url(#skinGlow)"/>
+            <path d="M118,215 Q116,280 118,342" stroke="#ebd0c5" stroke-width="1.2" fill="none"/>
+
+            <!-- Knees contour -->
+            <ellipse cx="88" cy="275" rx="3.5" ry="2" fill="#f2cbbe" opacity="0.6"/>
+            <ellipse cx="111" cy="275" rx="3.5" ry="2" fill="#f2cbbe" opacity="0.6"/>
+
+            <!-- Torso & Waist -->
+            <path d="M72,118 Q68,155 76,220 L124,220 Q132,155 128,118 Z" fill="url(#skinGlow)"/>
+            <!-- Collarbone -->
+            <path d="M85,116 Q100,122 115,116" stroke="#e8beaf" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+
+            <!-- Arms with joint contours -->
+            <!-- Left Arm -->
+            <path d="M72,120 Q56,155 60,195 Q64,196 68,192 Q68,158 76,125 Z" fill="url(#skinGlow)"/>
+            <!-- Right Arm -->
+            <path d="M128,120 Q144,155 140,195 Q136,196 132,192 Q132,158 124,125 Z" fill="url(#skinGlow)"/>
+
+            <!-- Neck -->
+            <path d="M92,98 L92,122 L108,122 L108,98 Z" fill="url(#skinGlow)"/>
+            <path d="M92,115 Q100,120 108,115" stroke="#e8beaf" stroke-width="1.5" fill="none"/>
+
+            <!-- Head Shape -->
+            <path d="M74,80 Q74,48 100,48 Q126,48 126,80 Q126,106 100,106 Q74,106 74,80 Z" fill="url(#skinGlow)"/>
+
+            <!-- Cute Anime Face Details -->
+            <!-- Eyes Base & Sparkle -->
+            <g id="face-eyes">
+              <!-- Left Eye -->
+              <ellipse cx="89" cy="80" rx="5" ry="7" fill="#4a2e2b"/>
+              <ellipse cx="89" cy="81" rx="4" ry="5.5" fill="#7a3848"/>
+              <circle cx="87.5" cy="77.5" r="2" fill="#ffffff"/>
+              <circle cx="90.5" cy="83" r="1" fill="#ffffff"/>
+              <path d="M82,74 Q89,70 95,74" fill="none" stroke="#2c1a18" stroke-width="1.8" stroke-linecap="round"/>
+              <path d="M83,72 L81,70" stroke="#2c1a18" stroke-width="1.2" stroke-linecap="round"/>
+
+              <!-- Right Eye -->
+              <ellipse cx="111" cy="80" rx="5" ry="7" fill="#4a2e2b"/>
+              <ellipse cx="111" cy="81" rx="4" ry="5.5" fill="#7a3848"/>
+              <circle cx="109.5" cy="77.5" r="2" fill="#ffffff"/>
+              <circle cx="112.5" cy="83" r="1" fill="#ffffff"/>
+              <path d="M105,74 Q111,70 118,74" fill="none" stroke="#2c1a18" stroke-width="1.8" stroke-linecap="round"/>
+              <path d="M117,72 L119,70" stroke="#2c1a18" stroke-width="1.2" stroke-linecap="round"/>
+
+              <!-- Eyebrows -->
+              <path d="M83,67 Q88,64 94,67" stroke="#7a4e3a" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+              <path d="M106,67 Q112,64 117,67" stroke="#7a4e3a" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+            </g>
+
+            <!-- Rosy Cheeks -->
+            <ellipse cx="83" cy="88" rx="5" ry="3" fill="#f09ca8" opacity="0.6"/>
+            <ellipse cx="117" cy="88" rx="5" ry="3" fill="#f09ca8" opacity="0.6"/>
+            <path d="M81,88 L85,86 M115,88 L119,86" stroke="#e07b8b" stroke-width="1" opacity="0.7"/>
+
+            <!-- Cute Mouth & Nose -->
+            <circle cx="100" cy="85" r="0.8" fill="#d99ca5"/>
+            <path d="M96,92 Q100,97 104,92" fill="#a64f60" opacity="0.85"/>
+            <path d="M97,92 Q100,94 103,92" fill="#ffffff" opacity="0.9"/>
+          </g>
+
+          <!-- Dynamic Clothing Layers -->
+          <g id="layer-socks"></g>
+          <g id="layer-shoes"></g>
+          <g id="layer-bottom"></g>
+          <g id="layer-top"></g>
+          <g id="layer-hair"></g>
+          <g id="layer-accessory"></g>
+        </svg>
+      </div>
+
+      <!-- Polaroid Snap Modal Inside Game -->
+      <div class="polaroid-card" id="polaroidCard">
+        <div class="polaroid-img" id="polaroidShot"></div>
+        <div class="polaroid-caption" id="polaroidCaption">MÉLIE Look #01</div>
+        <div style="font-size: 10px; color: var(--muted); margin-top: 4px;" id="polaroidScore">Style Score: 100/100 ♡</div>
+        <button id="closePolaroidBtn" style="margin-top:12px; border:1px solid var(--wine); background:transparent; color:var(--wine); padding:5px 12px; border-radius:12px; font-size:10px; cursor:pointer;">CLOSE ✕</button>
+      </div>
+    </div>
+
+    <!-- Wardrobe Control Panel -->
+    <div class="dressup-controls">
+      <div class="dressup-tabs" id="dressupTabs">
+        <button class="dressup-tab active" data-tab="hair">髮型 Hair</button>
+        <button class="dressup-tab" data-tab="top">上衣 Tops</button>
+        <button class="dressup-tab" data-tab="bottom">下身 Bottoms</button>
+        <button class="dressup-tab" data-tab="socks">襪款 Socks</button>
+        <button class="dressup-tab" data-tab="accessory">飾品 Acc</button>
+      </div>
+
+      <div class="items-grid" id="itemsGrid">
+        <!-- Wardrobe item cards populated by JavaScript -->
+      </div>
+
+      <div style="display:flex; gap:10px; margin-top:10px;">
+        <button id="snapPhotoBtn" class="primary" style="flex:1; margin-top:0; justify-content:center; padding:12px;">
+          SNAP PHOTO 📷 拍立得寫真
+        </button>
+        <button id="randomOutfitsBtn" class="dice-btn" style="padding:0 16px; border-radius:4px; font-size:10px; letter-spacing:0.1em;">
+          🎲 隨機穿搭
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- About Section -->
+<section class="section" id="about">
+  <div class="about">
+    <div class="about-mark">MÉLIE</div>
+    <div>
+      <div class="eyebrow">A NOTE FROM MÉLIE</div>
+      <h2>Every pair,<br>one of a kind.</h2>
+      <p>每一雙鞋，都能呈現不同的自己。MÉLIE 相信穿搭不只是選擇衣物，更是整理心情、表達個性的方式。從鞋型、色彩到細節，慢慢搭配出最貼近自己的姿態。</p>
+      <a class="primary" href="#customize">CREATE YOUR PAIR　↗</a>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <span class="logo" style="color:#fff3e8">MÉLIE</span>
+  <span>MARY JANE STUDIO · DESIGN YOUR OWN PAIR</span>
+  <span>© 2026 MÉLIE CONCEPT</span>
+</footer>
+
+<!-- Toast notification -->
+<div class="toast" id="toast">Design saved in this browser.</div>
+
+<!-- Import map to fix bare module specifier resolution -->
+<script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+    }
+  }
+</script>
+
+<!-- Three.js Module Import -->
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+// Color definitions mapping name to HEX code and display labels
+const COLOR_PRESETS = [
+  { name: 'Black', hex: '#18181a', label: '經典黑' },
+  { name: 'Ivory', hex: '#ede3d5', label: '奶油白' },
+  { name: 'Milk Tea', hex: '#ba9b80', label: '奶茶棕' },
+  { name: 'Brown', hex: '#58392b', label: '深焦糖' },
+  { name: 'Burgundy', hex: '#7a2e3d', label: '酒紅' },
+  { name: 'Pink', hex: '#d99ea9', label: '櫻花粉' },
+  { name: 'Gold', hex: '#d4af37', label: '復古金' },
+  { name: 'Silver', hex: '#c5c9cc', label: '星光銀' }
+];
+
+// App Global State
+const state = {
+  activeTab: 'color', // style, part, color, material
+  style: 'classic', // classic, square, platform
+  material: 'gloss', // gloss, matte, suede
+  activePart: 'upper', // upper, strap, sole, buckle
+  colors: {
+    upper: '#18181a',
+    strap: '#18181a',
+    sole: '#18181a',
+    buckle: '#d4af37'
+  }
+};
+
+// Leather Material Settings
+const MATERIAL_CONFIGS = {
+  gloss: { roughness: 0.1, metalness: 0.05, clearcoat: 1.0, clearcoatRoughness: 0.08 },
+  matte: { roughness: 0.55, metalness: 0.0, clearcoat: 0.1, clearcoatRoughness: 0.4 },
+  suede: { roughness: 0.92, metalness: 0.0, clearcoat: 0.0, clearcoatRoughness: 0.9 }
+};
+
+// Renderers array to keep track of viewers
+const scenes = [];
+
+/**
+ * Procedural Geometry Creator for Mary Jane Shoe Model
+ */
+function createMaryJaneShoeGroup(shoeState) {
+  const shoeGroup = new THREE.Group();
+  const partMeshMap = { upper: [], strap: [], sole: [], buckle: [] };
+
+  // Material Helper Generator
+  function makeMaterial(hexColor, partKey) {
+    let matProps = { color: new THREE.Color(hexColor) };
+    if (partKey === 'buckle') {
+      matProps.roughness = 0.25;
+      matProps.metalness = 0.85;
+    } else if (partKey === 'sole') {
+      matProps.roughness = 0.7;
+      matProps.metalness = 0.02;
+    } else {
+      const cfg = MATERIAL_CONFIGS[shoeState.material] || MATERIAL_CONFIGS.gloss;
+      Object.assign(matProps, cfg);
+    }
+    return new THREE.MeshPhysicalMaterial(matProps);
+  }
+
+  // Helper to register mesh for part updates and raycasting
+  function addMesh(partName, geometry, material, pos = [0,0,0], rot = [0,0,0], scale = [1,1,1]) {
+    const mesh = new THREE.Mesh(geometry, material);
+    mesh.position.set(...pos);
+    mesh.rotation.set(...rot);
+    mesh.scale.set(...scale);
+    mesh.castShadow = true;
+    mesh.receiveShadow = true;
+    mesh.userData = { partName };
+    shoeGroup.add(mesh);
+    if (partMeshMap[partName]) partMeshMap[partName].push(mesh);
+    return mesh;
+  }
+
+  // 1. OUTSOLE & HEEL GEOMETRY
+  function createSoleGeometry() {
+    const isSquare = shoeState.style === 'square';
+    const isPlatform = shoeState.style === 'platform';
+
+    const shape = new THREE.Shape();
+    // Contour footprint path (X: toe to heel, Z: width)
+    const heelX = -1.6;
+    const toeX = 1.6;
+    const maxW = isSquare ? 0.75 : 0.68;
+
+    shape.moveTo(heelX, -0.35);
+    shape.bezierCurveTo(heelX - 0.35, -0.35, heelX - 0.4, 0.35, heelX, 0.35);
+    shape.bezierCurveTo(-0.6, maxW, 0.6, maxW, toeX - (isSquare ? 0.2 : 0.4), maxW * (isSquare ? 0.9 : 0.8));
+    
+    if (isSquare) {
+      shape.lineTo(toeX, maxW * 0.6);
+      shape.lineTo(toeX, -maxW * 0.6);
+      shape.lineTo(toeX - 0.2, -maxW * 0.9);
+    } else {
+      shape.bezierCurveTo(toeX + 0.2, 0.3, toeX + 0.2, -0.3, toeX - 0.4, -maxW * 0.8);
+    }
+
+    shape.bezierCurveTo(0.6, -maxW, -0.6, -maxW, heelX, -0.35);
+
+    const extrudeSettings = {
+      depth: isPlatform ? 0.38 : 0.16,
+      bevelEnabled: true,
+      bevelSegments: 4,
+      steps: 1,
+      bevelSize: 0.08,
+      bevelThickness: 0.08,
+      curveSegments: 32
+    };
+
+    return new THREE.ExtrudeGeometry(shape, extrudeSettings);
+  }
+
+  const soleMat = makeMaterial(shoeState.colors.sole, 'sole');
+  const soleGeo = createSoleGeometry();
+  const soleY = shoeState.style === 'platform' ? -0.45 : -0.28;
+  const soleMesh = addMesh('sole', soleGeo, soleMat, [0, soleY, 0], [Math.PI / 2, 0, 0]);
+
+  // Distinct Heel Block
+  if (shoeState.style !== 'platform') {
+    const heelWidth = shoeState.style === 'square' ? 0.72 : 0.64;
+    const heelGeo = new THREE.BoxGeometry(0.75, 0.55, heelWidth);
+    addMesh('sole', heelGeo, soleMat, [-1.25, soleY - 0.28, 0]);
+  } else {
+    // Platform treads
+    for (let i = -1.2; i <= 1.2; i += 0.3) {
+      const treadGeo = new THREE.BoxGeometry(0.12, 0.08, 1.2);
+      addMesh('sole', treadGeo, soleMat, [i, soleY - 0.22, 0]);
+    }
+  }
+
+  // Midsole Piping Accent
+  const weltGeo = new THREE.TorusGeometry(1.2, 0.025, 8, 48);
+  addMesh('sole', weltGeo, makeMaterial('#3a2f2b', 'sole'), [0, soleY + 0.12, 0], [Math.PI/2, 0, 0], [1.3, 0.5, 1]);
+
+  // 2. INSOLE / LINING (Warm Tan Tan Leather)
+  const insoleMat = new THREE.MeshStandardMaterial({ color: 0xcbb292, roughness: 0.6 });
+  const insoleGeo = new THREE.CylinderGeometry(0.62, 0.58, 0.06, 32);
+  const insoleMesh = addMesh('upper', insoleGeo, insoleMat, [0, soleY + 0.2, 0], [0, 0, 0], [2.4, 1, 0.95]);
+
+  // Insole Brand Badge Detail
+  const badgeGeo = new THREE.PlaneGeometry(0.5, 0.22);
+  const badgeMat = new THREE.MeshStandardMaterial({ color: 0x793848, roughness: 0.4 });
+  const badge = new THREE.Mesh(badgeGeo, badgeMat);
+  badge.rotation.x = -Math.PI / 2;
+  badge.position.set(-0.8, soleY + 0.24, 0);
+  shoeGroup.add(badge);
+
+  // 3. UPPER / VAMP & COUNTER (Sculpted Low-Cut Shoe Shell)
+  const upperMat = makeMaterial(shoeState.colors.upper, 'upper');
+  const isSquare = shoeState.style === 'square';
+
+  // Front Toe Box Dome (Vamp)
+  const toeCapGeo = new THREE.SphereGeometry(0.85, 48, 32, 0, Math.PI * 2, 0, Math.PI * 0.55);
+  const toeCapScale = isSquare ? [1.15, 0.52, 0.78] : [1.25, 0.55, 0.72];
+  addMesh('upper', toeCapGeo, upperMat, [0.65, soleY + 0.2, 0], [0, 0, -0.05], toeCapScale);
+
+  // Rear Heel Counter Cup
+  const heelCupGeo = new THREE.SphereGeometry(0.72, 40, 28, 0, Math.PI * 2, 0, Math.PI * 0.6);
+  addMesh('upper', heelCupGeo, upperMat, [-1.1, soleY + 0.35, 0], [0, 0, 0.1], [0.85, 0.75, 0.72]);
+
+  // Lower Side Quarter Walls
+  const sideWallGeo = new THREE.CylinderGeometry(0.68, 0.72, 0.48, 32, 1, true);
+  addMesh('upper', sideWallGeo, upperMat, [-0.2, soleY + 0.28, 0], [0, 0, 0], [1.9, 1, 0.72]);
+
+  // Collar Piping / Hem Line Edge
+  const collarPts = [];
+  for (let i = 0; i <= 60; i++) {
+    const t = (i / 60) * Math.PI * 2;
+    const cx = Math.cos(t) * 1.35 - 0.1;
+    const cz = Math.sin(t) * 0.48;
+    const cy = soleY + 0.45 + Math.pow(Math.cos(t), 2) * 0.12;
+    collarPts.push(new THREE.Vector3(cx, cy, cz));
+  }
+  const collarCurve = new THREE.CatmullRomCurve3(collarPts);
+  const collarGeo = new THREE.TubeGeometry(collarCurve, 64, 0.022, 8, true);
+  addMesh('upper', collarGeo, makeMaterial('#2a2220', 'upper'), [0,0,0]);
+
+  // Perimeter Stitching Details
+  const stitchMat = new THREE.MeshBasicMaterial({ color: 0xdfd3c3 });
+  for (let i = 0; i < 32; i++) {
+    const a = (i / 32) * Math.PI * 2;
+    const sx = Math.cos(a) * 1.32 - 0.1;
+    const sz = Math.sin(a) * 0.49;
+    if (sx > -0.7 || Math.abs(sz) > 0.35) { // Skip instep opening gap
+      const dot = new THREE.Mesh(new THREE.SphereGeometry(0.012, 6, 6), stitchMat);
+      dot.position.set(sx, soleY + 0.42, sz);
+      shoeGroup.add(dot);
+    }
+  }
+
+  // 4. STRAPS & BUCKLES
+  const strapMat = makeMaterial(shoeState.colors.strap, 'strap');
+  const buckleMat = makeMaterial(shoeState.colors.buckle, 'buckle');
+
+  function createStrapAndBuckle(xPos, zOffset) {
+    // Arching strap path over the instep
+    const curve = new THREE.CatmullRomCurve3([
+      new THREE.Vector3(xPos, soleY + 0.32, -0.48),
+      new THREE.Vector3(xPos + 0.05, soleY + 0.72, -0.25),
+      new THREE.Vector3(xPos + 0.08, soleY + 0.76, 0.0),
+      new THREE.Vector3(xPos + 0.05, soleY + 0.72, 0.25),
+      new THREE.Vector3(xPos, soleY + 0.32, 0.48)
+    ]);
+
+    const strapGeo = new THREE.TubeGeometry(curve, 32, 0.045, 10, false);
+    addMesh('strap', strapGeo, strapMat, [0, 0, 0]);
+
+    // Metallic Buckle (Heart Shape Procedural Curve)
+    const heartPts = [];
+    for (let i = 0; i <= 40; i++) {
+      const t = (i / 40) * Math.PI * 2;
+      const hx = 16 * Math.pow(Math.sin(t), 3) / 110;
+      const hy = (13 * Math.cos(t) - 5 * Math.cos(2*t) - 2 * Math.cos(3*t) - Math.cos(4*t)) / 110;
+      heartPts.push(new THREE.Vector3(hx, hy, 0));
+    }
+    const heartCurve = new THREE.CatmullRomCurve3(heartPts, true);
+    const buckleGeo = new THREE.TubeGeometry(heartCurve, 40, 0.018, 8, true);
+
+    // Place Buckle on outer side (+Z side)
+    const bucklePos = [xPos + 0.04, soleY + 0.58, 0.44];
+    const buckleMesh = addMesh('buckle', buckleGeo, buckleMat, bucklePos, [0, -Math.PI / 6, 0]);
+
+    // Buckle Center Pin
+    const pinGeo = new THREE.CylinderGeometry(0.01, 0.01, 0.12, 8);
+    addMesh('buckle', pinGeo, buckleMat, [xPos + 0.04, soleY + 0.58, 0.44], [0, 0, Math.PI / 2]);
+  }
+
+  // Signature Double Straps
+  createStrapAndBuckle(-0.05, 0);
+  createStrapAndBuckle(0.42, 0);
+
+  // Group Pivot Adjustment to Center
+  shoeGroup.position.set(0, 0, 0);
+
+  return { shoeGroup, partMeshMap, makeMaterial };
+}
+
+/**
+ * Scene Setup Helper (Hero Canvas & Customize Studio Viewer)
+ */
+function initShoeViewer(containerEl, isInteractive = true) {
+  const scene = new THREE.Scene();
+  scene.background = new THREE.Color(0xfaf3ec);
+
+  const camera = new THREE.PerspectiveCamera(35, containerEl.clientWidth / containerEl.clientHeight, 0.1, 100);
+  camera.position.set(4.8, 3.2, 5.8);
+
+  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false, powerPreference: "high-performance" });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setSize(containerEl.clientWidth, containerEl.clientHeight);
+  renderer.shadowMap.enabled = true;
+  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.12;
+  containerEl.prepend(renderer.domElement);
+
+  // Orbit Controls
+  const controls = new OrbitControls(camera, renderer.domElement);
+  controls.enableDamping = true;
+  controls.dampingFactor = 0.05;
+  controls.enablePan = false;
+  controls.minDistance = 3.5;
+  controls.maxDistance = 10;
+  controls.target.set(0, -0.1, 0);
+  controls.enabled = isInteractive;
+
+  // Soft Studio Lighting Setup
+  const ambientLight = new THREE.HemisphereLight(0xfff8f2, 0x8c7365, 1.8);
+  scene.add(ambientLight);
+
+  const mainLight = new THREE.DirectionalLight(0xffffff, 2.4);
+  mainLight.position.set(5, 8, 5);
+  mainLight.castShadow = true;
+  mainLight.shadow.mapSize.width = 1024;
+  mainLight.shadow.mapSize.height = 1024;
+  mainLight.shadow.bias = -0.0001;
+  scene.add(mainLight);
+
+  const fillLight = new THREE.DirectionalLight(0xffe5dc, 1.2);
+  fillLight.position.set(-5, 4, -4);
+  scene.add(fillLight);
+
+  const rimLight = new THREE.DirectionalLight(0xffffff, 0.8);
+  rimLight.position.set(0, 6, -6);
+  scene.add(rimLight);
+
+  // Soft Ground Shadow Contact Plane
+  const shadowPlaneGeo = new THREE.PlaneGeometry(20, 20);
+  const shadowPlaneMat = new THREE.ShadowMaterial({ opacity: 0.15 });
+  const shadowPlane = new THREE.Mesh(shadowPlaneGeo, shadowPlaneMat);
+  shadowPlane.rotation.x = -Math.PI / 2;
+  shadowPlane.position.y = -0.85;
+  shadowPlane.receiveShadow = true;
+  scene.add(shadowPlane);
+
+  // Ground Reflection Pad
+  const padGeo = new THREE.CircleGeometry(2.4, 64);
+  const padMat = new THREE.MeshBasicMaterial({ color: 0xebdcd0, transparent: true, opacity: 0.45 });
+  const pad = new THREE.Mesh(padGeo, padMat);
+  pad.rotation.x = -Math.PI / 2;
+  pad.position.y = -0.84;
+  scene.add(pad);
+
+  // NOOMO/Temple-style Architectural Scene Elements (Columns, Ground Mounds & Flower Beds)
+  const templeGroup = new THREE.Group();
+
+  function createArchitecturalColumn(x, z, scaleY = 1.0, isFar = false) {
+    const colGroup = new THREE.Group();
+    const colMat = new THREE.MeshStandardMaterial({ 
+      color: isFar ? 0xfbf4ef : 0xf2e8e0, 
+      roughness: 0.85,
+      metalness: 0.05
+    });
+    
+    // Base Plinth
+    const baseGeo = new THREE.BoxGeometry(0.8, 0.2, 0.8);
+    const base = new THREE.Mesh(baseGeo, colMat);
+    base.position.y = -0.75;
+    colGroup.add(base);
+
+    // Fluted Shaft
+    const shaftGeo = new THREE.CylinderGeometry(0.3, 0.34, 3.8 * scaleY, 24);
+    const shaft = new THREE.Mesh(shaftGeo, colMat);
+    shaft.position.y = 0.9 * scaleY - 0.6;
+    shaft.castShadow = !isFar;
+    shaft.receiveShadow = true;
+    colGroup.add(shaft);
+
+    // Broken top capital detail
+    const topGeo = new THREE.CylinderGeometry(0.38, 0.32, 0.25, 16);
+    const topCap = new THREE.Mesh(topGeo, colMat);
+    topCap.position.y = 2.8 * scaleY - 0.6;
+    colGroup.add(topCap);
+
+    colGroup.position.set(x, 0, z);
+    templeGroup.add(colGroup);
+  }
+
+  // Multi-depth Pillars (Foreground, Midground, Far background)
+  createArchitecturalColumn(-3.8, -1.8, 1.25, false); // Mid Left
+  createArchitecturalColumn(3.8, -2.2, 1.1, false);  // Mid Right
+  createArchitecturalColumn(-6.2, -5.5, 1.5, true);   // Far Left
+  createArchitecturalColumn(6.0, -6.0, 1.4, true);    // Far Right
+  createArchitecturalColumn(-1.8, -7.5, 1.6, true);   // Distant Center Left
+  createArchitecturalColumn(2.2, -8.0, 1.7, true);    // Distant Center Right
+
+  // White Snow/Marble Snowy Ground Mounds around shoe base
+  const moundMat = new THREE.MeshStandardMaterial({ color: 0xfff8f2, roughness: 0.9 });
+  const mound1 = new THREE.Mesh(new THREE.SphereGeometry(1.8, 24, 16), moundMat);
+  mound1.scale.set(1.8, 0.25, 1.2);
+  mound1.position.set(-2.2, -0.9, -1.0);
+  templeGroup.add(mound1);
+
+  const mound2 = new THREE.Mesh(new THREE.SphereGeometry(1.8, 24, 16), moundMat);
+  mound2.scale.set(1.9, 0.28, 1.3);
+  mound2.position.set(2.4, -0.92, -0.8);
+  templeGroup.add(mound2);
+
+  // Red Rose Flower Beds Scatter
+  const flowerStemMat = new THREE.MeshStandardMaterial({ color: 0x5a6b52, roughness: 0.8 });
+  const flowerPetalMat = new THREE.MeshStandardMaterial({ color: 0xaa2e3b, roughness: 0.4 });
+  
+  function createFlowerPatch(centerX, centerZ, count = 25) {
+    for (let i = 0; i < count; i++) {
+      const fx = centerX + (Math.random() - 0.5) * 2.2;
+      const fz = centerZ + (Math.random() - 0.5) * 1.8;
+      const fy = -0.75 + Math.random() * 0.15;
+
+      // Stem
+      const stem = new THREE.Mesh(new THREE.CylinderGeometry(0.012, 0.012, 0.35 + Math.random() * 0.2, 6), flowerStemMat);
+      stem.position.set(fx, fy, fz);
+      stem.rotation.z = (Math.random() - 0.5) * 0.2;
+      templeGroup.add(stem);
+
+      // Red Rose Bloom
+      const bloom = new THREE.Mesh(new THREE.DodecahedronGeometry(0.045 + Math.random() * 0.035, 1), flowerPetalMat);
+      bloom.position.set(fx, fy + 0.18, fz);
+      templeGroup.add(bloom);
+    }
+  }
+
+  createFlowerPatch(-2.4, -0.8, 28);
+  createFlowerPatch(2.3, -0.6, 28);
+  createFlowerPatch(0, -3.5, 35); // Background flower field
+
+  scene.add(templeGroup);
+
+  // Falling Red Rose Petals Particle System (As in Image 1)
+  const petalCount = 120;
+  const petalGeo = new THREE.BufferGeometry();
+  const petalPositions = new Float32Array(petalCount * 3);
+  const petalRotations = new Float32Array(petalCount * 3);
+  const petalVelocities = new Float32Array(petalCount);
+
+  for (let i = 0; i < petalCount; i++) {
+    petalPositions[i * 3] = (Math.random() - 0.5) * 12;
+    petalPositions[i * 3 + 1] = Math.random() * 6 - 0.5;
+    petalPositions[i * 3 + 2] = (Math.random() - 0.5) * 12;
+
+    petalRotations[i * 3] = Math.random() * Math.PI;
+    petalRotations[i * 3 + 1] = Math.random() * Math.PI;
+    petalRotations[i * 3 + 2] = Math.random() * Math.PI;
+
+    petalVelocities[i] = 0.003 + Math.random() * 0.005;
+  }
+
+  // Create Rose Petal Shape Instance Texture
+  const petalCanvas = document.createElement('canvas');
+  petalCanvas.width = 64; petalCanvas.height = 64;
+  const pCtx2 = petalCanvas.getContext('2d');
+  pCtx2.beginPath();
+  pCtx2.moveTo(32, 8);
+  pCtx2.bezierCurveTo(56, 8, 58, 40, 32, 58);
+  pCtx2.bezierCurveTo(6, 40, 8, 8, 32, 8);
+  pCtx2.fillStyle = '#a62b38';
+  pCtx2.fill();
+
+  const petalTexture = new THREE.CanvasTexture(petalCanvas);
+  const petalMat = new THREE.PointsMaterial({
+    size: 0.28,
+    map: petalTexture,
+    transparent: true,
+    opacity: 0.9,
+    depthWrite: false
+  });
+
+  petalGeo.setAttribute('position', new THREE.BufferAttribute(petalPositions, 3));
+  const petals = new THREE.Points(petalGeo, petalMat);
+  scene.add(petals);
+
+  // Soft Floating Particle Dust Light Points
+  const particleCount = 45;
+  const particleGeo = new THREE.BufferGeometry();
+  const particlePositions = new Float32Array(particleCount * 3);
+  const particlePhases = new Float32Array(particleCount);
+
+  for (let i = 0; i < particleCount; i++) {
+    particlePositions[i * 3] = (Math.random() - 0.5) * 7;
+    particlePositions[i * 3 + 1] = Math.random() * 3.5 - 0.5;
+    particlePositions[i * 3 + 2] = (Math.random() - 0.5) * 7;
+    particlePhases[i] = Math.random() * Math.PI * 2;
+  }
+  particleGeo.setAttribute('position', new THREE.BufferAttribute(particlePositions, 3));
+
+  // Canvas texture for soft round point spark
+  const pCanvas = document.createElement('canvas');
+  pCanvas.width = 32; pCanvas.height = 32;
+  const pCtx = pCanvas.getContext('2d');
+  const grad = pCtx.createRadialGradient(16, 16, 0, 16, 16, 16);
+  grad.addColorStop(0, 'rgba(255, 245, 235, 0.95)');
+  grad.addColorStop(0.4, 'rgba(212, 175, 55, 0.4)');
+  grad.addColorStop(1, 'rgba(255, 255, 255, 0)');
+  pCtx.fillStyle = grad; pCtx.fillRect(0, 0, 32, 32);
+
+  const pTexture = new THREE.CanvasTexture(pCanvas);
+  const particleMat = new THREE.PointsMaterial({
+    size: 0.22,
+    map: pTexture,
+    transparent: true,
+    opacity: 0.65,
+    blending: THREE.AdditiveBlending,
+    depthWrite: false
+  });
+  const particles = new THREE.Points(particleGeo, particleMat);
+  scene.add(particles);
+
+  // Build Shoe Mesh Group
+  let currentShoe = createMaryJaneShoeGroup(state);
+  scene.add(currentShoe.shoeGroup);
+
+  // Raycasting for interactive part picking
+  const raycaster = new THREE.Raycaster();
+  const mouse = new THREE.Vector2();
+  const hoverTag = document.getElementById('partHoverTag');
+
+  if (isInteractive) {
+    renderer.domElement.addEventListener('pointermove', (e) => {
+      const rect = renderer.domElement.getBoundingClientRect();
+      mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+      mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+
+      raycaster.setFromCamera(mouse, camera);
+      const intersects = raycaster.intersectObjects(currentShoe.shoeGroup.children, true);
+
+      if (intersects.length > 0 && intersects[0].object.userData.partName) {
+        const part = intersects[0].object.userData.partName;
+        if (hoverTag) {
+          hoverTag.textContent = part.toUpperCase();
+          hoverTag.style.opacity = '1';
+        }
+        document.body.style.cursor = 'pointer';
+      } else {
+        if (hoverTag) hoverTag.style.opacity = '0';
+        document.body.style.cursor = 'default';
+      }
+    });
+
+    renderer.domElement.addEventListener('pointerdown', (e) => {
+      const rect = renderer.domElement.getBoundingClientRect();
+      mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+      mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+
+      raycaster.setFromCamera(mouse, camera);
+      const intersects = raycaster.intersectObjects(currentShoe.shoeGroup.children, true);
+
+      if (intersects.length > 0 && intersects[0].object.userData.partName) {
+        const clickedPart = intersects[0].object.userData.partName;
+        setActivePart(clickedPart);
+      }
+    });
+  }
+
+  // Auto-rotate flag
+  let autoRotate = true;
+  renderer.domElement.addEventListener('pointerdown', () => { autoRotate = false; });
+
+  // Animation Loop
+  let clock = new THREE.Clock();
+  function animate() {
+    requestAnimationFrame(animate);
+    const elapsedTime = clock.getElapsedTime();
+
+    // Floating particles subtle animation
+    const positions = particleGeo.attributes.position.array;
+    for (let i = 0; i < particleCount; i++) {
+      positions[i * 3 + 1] += Math.sin(elapsedTime * 0.8 + particlePhases[i]) * 0.0015;
+      positions[i * 3] += Math.cos(elapsedTime * 0.5 + particlePhases[i]) * 0.0012;
+    }
+    particleGeo.attributes.position.needsUpdate = true;
+
+    // Falling Rose Petals Dynamic Swirl
+    const pPos = petalGeo.attributes.position.array;
+    for (let i = 0; i < petalCount; i++) {
+      pPos[i * 3 + 1] -= petalVelocities[i]; // Fall down
+      pPos[i * 3] += Math.sin(elapsedTime * 1.2 + i) * 0.002; // Sway X
+      pPos[i * 3 + 2] += Math.cos(elapsedTime * 0.9 + i) * 0.002; // Sway Z
+
+      // Reset when reaching bottom
+      if (pPos[i * 3 + 1] < -0.8) {
+        pPos[i * 3 + 1] = 5.5;
+        pPos[i * 3] = (Math.random() - 0.5) * 12;
+        pPos[i * 3 + 2] = (Math.random() - 0.5) * 12;
+      }
+    }
+    petalGeo.attributes.position.needsUpdate = true;
+
+    if (autoRotate && !isInteractive) {
+      currentShoe.shoeGroup.rotation.y += 0.006;
+    } else if (autoRotate && isInteractive) {
+      currentShoe.shoeGroup.rotation.y += 0.002;
+    }
+    controls.update();
+    renderer.render(scene, camera);
+  }
+  animate();
+
+  // Resize Handler
+  function handleResize() {
+    const w = containerEl.clientWidth;
+    const h = containerEl.clientHeight;
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+    renderer.setSize(w, h);
+  }
+  window.addEventListener('resize', handleResize);
+
+  // API Methods
+  const api = {
+    rebuild() {
+      scene.remove(currentShoe.shoeGroup);
+      currentShoe = createMaryJaneShoeGroup(state);
+      scene.add(currentShoe.shoeGroup);
+    },
+    updateColors() {
+      Object.keys(state.colors).forEach(part => {
+        const colorHex = state.colors[part];
+        const meshes = currentShoe.partMeshMap[part] || [];
+        meshes.forEach(mesh => {
+          if (mesh.material) {
+            mesh.material.color.set(colorHex);
+            if (part !== 'buckle' && part !== 'sole') {
+              const cfg = MATERIAL_CONFIGS[state.material];
+              mesh.material.roughness = cfg.roughness;
+              mesh.material.metalness = cfg.metalness;
+              mesh.material.clearcoat = cfg.clearcoat;
+            }
+          }
+        });
+      });
+    },
+    setCameraView(viewName) {
+      autoRotate = false;
+      const target = new THREE.Vector3(0, -0.1, 0);
+      switch(viewName) {
+        case 'front':
+          camera.position.set(6.2, 0.8, 0);
+          break;
+        case 'side':
+          camera.position.set(0, 0.8, 6.2);
+          break;
+        case 'top':
+          camera.position.set(0.1, 6.8, 0.1);
+          break;
+        case 'angle':
+          camera.position.set(4.5, 3.2, 4.5);
+          break;
+        default: // Reset
+          camera.position.set(4.8, 3.2, 5.8);
+          autoRotate = true;
+      }
+      controls.target.copy(target);
+      controls.update();
+    }
+  };
+
+  scenes.push(api);
+  return api;
+}
+
+// Instantiate Viewers
+let heroViewerApi, studioViewerApi;
+
+window.addEventListener('DOMContentLoaded', () => {
+  heroViewerApi = initShoeViewer(document.getElementById('heroCanvasWrap'), false);
+  studioViewerApi = initShoeViewer(document.getElementById('studioCanvasWrap'), true);
+
+  setupUIEventListeners();
+  renderRightPaletteGrid();
+  updateSummaryUI();
+});
+
+/**
+ * NOOMO-style UI Rendering & State Synchronizers
+ */
+function setActivePart(partName) {
+  state.activePart = partName;
+  state.activeTab = 'color'; // Automatically switch to color palette for the selected part
+  document.querySelectorAll('#leftNavMenu .noomo-menu-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.tab === 'color');
+  });
+  renderRightPaletteGrid();
+  updateSummaryUI();
+}
+
+function renderRightPaletteGrid() {
+  const gridContainer = document.getElementById('noomoGridOptions');
+  const titleEl = document.getElementById('paletteCategoryTitle');
+  const partEl = document.getElementById('activePartName');
+
+  gridContainer.innerHTML = '';
+  partEl.textContent = state.activePart.toUpperCase();
+
+  if (state.activeTab === 'style') {
+    titleEl.textContent = 'SILHOUETTE';
+    const styles = [
+      { id: 'classic', label: 'Classic Round' },
+      { id: 'square', label: 'Square Toe' },
+      { id: 'platform', label: 'Platform' }
+    ];
+    styles.forEach(s => {
+      const item = document.createElement('div');
+      item.className = 'grid-item-sq' + (state.style === s.id ? ' active' : '');
+      item.style.backgroundColor = '#ffffff';
+      item.innerHTML = `<span class="sq-label">${s.label}</span>`;
+      item.onclick = () => setShoeStyle(s.id);
+      gridContainer.appendChild(item);
+    });
+
+  } else if (state.activeTab === 'part') {
+    titleEl.textContent = 'PART SELECT';
+    const parts = [
+      { id: 'upper', label: 'UPPER 鞋面' },
+      { id: 'strap', label: 'STRAP 鞋帶' },
+      { id: 'sole', label: 'SOLE 鞋底' },
+      { id: 'buckle', label: 'BUCKLE 鞋扣' }
+    ];
+    parts.forEach(p => {
+      const item = document.createElement('div');
+      item.className = 'grid-item-sq' + (state.activePart === p.id ? ' active' : '');
+      item.style.backgroundColor = '#fffaf5';
+      item.innerHTML = `<span class="sq-label" style="font-weight:bold;">${p.label}</span>`;
+      item.onclick = () => {
+        state.activePart = p.id;
+        state.activeTab = 'color'; // auto switch to color
+        document.querySelectorAll('#leftNavMenu .noomo-menu-btn').forEach(b => {
+          b.classList.toggle('active', b.dataset.tab === 'color');
+        });
+        renderRightPaletteGrid();
+      };
+      gridContainer.appendChild(item);
+    });
+
+  } else if (state.activeTab === 'color') {
+    titleEl.textContent = 'COLOR PALETTE';
+    COLOR_PRESETS.forEach(c => {
+      const item = document.createElement('div');
+      item.className = 'grid-item-sq' + (state.colors[state.activePart] === c.hex ? ' active' : '');
+      item.style.backgroundColor = c.hex;
+      item.title = `${c.name} (${c.label})`;
+      item.onclick = () => setPartColor(c.hex);
+      gridContainer.appendChild(item);
+    });
+
+  } else if (state.activeTab === 'material') {
+    titleEl.textContent = 'MATERIAL';
+    const mats = [
+      { id: 'gloss', label: 'Patent Gloss' },
+      { id: 'matte', label: 'Matte Leather' },
+      { id: 'suede', label: 'Soft Suede' }
+    ];
+    mats.forEach(m => {
+      const item = document.createElement('div');
+      item.className = 'grid-item-sq' + (state.material === m.id ? ' active' : '');
+      item.style.backgroundColor = '#ffffff';
+      item.innerHTML = `<span class="sq-label">${m.label}</span>`;
+      item.onclick = () => setLeatherMaterial(m.id);
+      gridContainer.appendChild(item);
+    });
+  }
+}
+
+function setPartColor(hex) {
+  state.colors[state.activePart] = hex;
+  studioViewerApi.updateColors();
+  heroViewerApi.updateColors();
+  renderRightPaletteGrid();
+  updateSummaryUI();
+}
+
+function setShoeStyle(styleName) {
+  state.style = styleName;
+  studioViewerApi.rebuild();
+  heroViewerApi.rebuild();
+  renderRightPaletteGrid();
+  updateSummaryUI();
+}
+
+function setLeatherMaterial(matName) {
+  state.material = matName;
+  studioViewerApi.updateColors();
+  heroViewerApi.updateColors();
+  renderRightPaletteGrid();
+  updateSummaryUI();
+}
+
+function updateSummaryUI() {
+  const styleNames = { classic: 'No. 01 Classic', square: 'No. 02 Square Toe', platform: 'No. 03 Platform' };
+  const matNames = { gloss: 'Patent Gloss', matte: 'Matte Leather', suede: 'Soft Suede' };
+
+  function getColorName(hex) {
+    const found = COLOR_PRESETS.find(c => c.hex.toLowerCase() === hex.toLowerCase());
+    return found ? `${found.name}` : hex;
+  }
+
+  document.getElementById('summary').innerHTML = `
+    <strong>MODEL:</strong> ${styleNames[state.style]} | <strong>MAT:</strong> ${matNames[state.material]}<br>
+    <strong>UPPER:</strong> ${getColorName(state.colors.upper)} | <strong>STRAP:</strong> ${getColorName(state.colors.strap)}<br>
+    <strong>SOLE:</strong> ${getColorName(state.colors.sole)} | <strong>BUCKLE:</strong> ${getColorName(state.colors.buckle)}
+  `;
+}
+
+function setupUIEventListeners() {
+  // Left Menu Category Switching
+  document.querySelectorAll('#leftNavMenu .noomo-menu-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('#leftNavMenu .noomo-menu-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      state.activeTab = btn.dataset.tab;
+      renderRightPaletteGrid();
+    });
+  });
+
+  // Collection Grid Item Click
+  document.querySelectorAll('.product').forEach(p => {
+    p.addEventListener('click', () => {
+      setShoeStyle(p.dataset.product);
+      document.getElementById('customize').scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+
+  // Harmonized Curated Color Preset Palettes for Random Dice Roll
+  const HARMONIZED_PALETTES = [
+    { name: '經典奧黛麗 (French Black & White)', style: 'classic', mat: 'gloss', upper: '#18181a', strap: '#ede3d5', sole: '#18181a', buckle: '#d4af37' },
+    { name: '草苺奶霜 (Sweet Strawberry Soft)', style: 'classic', mat: 'gloss', upper: '#d99ea9', strap: '#ede3d5', sole: '#ede3d5', buckle: '#c5c9cc' },
+    { name: '法式復古酒紅 (Burgundy Vintage)', style: 'square', mat: 'gloss', upper: '#7a2e3d', strap: '#7a2e3d', sole: '#18181a', buckle: '#d4af37' },
+    { name: '燕麥焦糖奶茶 (Caramel Milk Tea)', style: 'square', mat: 'suede', upper: '#ba9b80', strap: '#58392b', sole: '#58392b', buckle: '#d4af37' },
+    { name: '鬆弛感厚底白 (Urban Platform Ivory)', style: 'platform', mat: 'matte', upper: '#ede3d5', strap: '#ede3d5', sole: '#18181a', buckle: '#c5c9cc' },
+    { name: '星夜金屬感 (Midnight Glam)', style: 'platform', mat: 'gloss', upper: '#18181a', strap: '#c5c9cc', sole: '#18181a', buckle: '#d4af37' },
+    { name: '溫柔奶油粉 (Powder Pink & Gold)', style: 'classic', mat: 'matte', upper: '#ede3d5', strap: '#d99ea9', sole: '#ede3d5', buckle: '#d4af37' }
+  ];
+
+  // Pink-White Dice Random Generator
+  document.getElementById('randomBtn').onclick = () => {
+    const diceIcon = document.querySelector('.dice-icon');
+    if (diceIcon) {
+      diceIcon.style.transform = 'rotate(360deg) scale(1.25)';
+      setTimeout(() => { diceIcon.style.transform = ''; }, 600);
+    }
+
+    const palette = HARMONIZED_PALETTES[Math.floor(Math.random() * HARMONIZED_PALETTES.length)];
+    state.style = palette.style;
+    state.material = palette.mat;
+    state.colors = { upper: palette.upper, strap: palette.strap, sole: palette.sole, buckle: palette.buckle };
+
+    setShoeStyle(state.style);
+    setLeatherMaterial(state.material);
+    showToast(`🎲 隨機切換：${palette.name}`);
+  };
+
+  // Save Design LocalStorage
+  document.getElementById('saveBtn').onclick = () => {
+    const saved = { ...state, timestamp: new Date().toISOString() };
+    localStorage.setItem('melie_custom_mary_jane', JSON.stringify(saved));
+    showToast('Your custom design has been saved! ♡');
+  };
+
+  // Modal Setup
+  const modal = document.getElementById('purchaseModal');
+  const openModal = () => modal.classList.add('open');
+  const closeModal = () => modal.classList.remove('open');
+
+  document.getElementById('buyBtn').onclick = openModal;
+  document.getElementById('modalCloseBtn').onclick = closeModal;
+  modal.onclick = (e) => { if (e.target === modal) closeModal(); };
+
+  // Size Selector Interactions
+  document.querySelectorAll('#sizeSelector .size-btn').forEach(btn => {
+    btn.onclick = () => {
+      document.querySelectorAll('#sizeSelector .size-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    };
+  });
+
+  // Channel Clicks
+  document.getElementById('channelOnline').onclick = () => {
+    closeModal();
+    showToast('🎉 正在為您跳轉至安全結帳頁面...');
+  };
+  document.getElementById('channelLine').onclick = () => {
+    closeModal();
+    showToast('💬 已複製訂製碼，正在開啟 LINE 專人服務！');
+  };
+  document.getElementById('channelStore').onclick = () => {
+    closeModal();
+    showToast('🏬 已為您開啟實體門市試穿預約表單');
+  };
+
+  // Mobile Menu Toggle
+  const menuBtn = document.getElementById('menuBtn');
+  const nav = document.getElementById('nav');
+  menuBtn.onclick = () => nav.classList.toggle('open');
+  document.querySelectorAll('#nav a').forEach(a => {
+    a.onclick = () => nav.classList.remove('open');
+  });
+
+  // Setup Paper Doll Game
+  initDressupGame();
+}
+
+/**
+ * Paper Doll Dress-Up Game Logic & SVG Renderers
+ */
+const WARDROBE = {
+  hair: [
+    { 
+      id: 'h1', name: '法式波浪捲髮', icon: '👩‍🦱', color: '#58392b', 
+      svg: `
+        <!-- Back Hair Volume -->
+        <path d="M62,75 Q52,110 58,160 Q65,190 75,200 Q78,160 72,110 Z" fill="#42291d" />
+        <path d="M138,75 Q148,110 142,160 Q135,190 125,200 Q122,160 128,110 Z" fill="#42291d" />
+        <!-- Main Wavy Locks -->
+        <path d="M70,70 C60,42 140,42 130,70 C142,88 145,125 138,165 C132,130 128,95 122,82 C100,68 80,68 78,82 C72,95 68,130 62,165 C55,125 58,88 70,70 Z" fill="#58392b" />
+        <!-- Front Bangs & Highlights -->
+        <path d="M76,68 Q100,76 124,68 Q115,55 100,55 Q85,55 76,68 Z" fill="#6d493a" />
+        <path d="M82,60 Q100,52 118,60" fill="none" stroke="#8c5f4c" stroke-width="2" stroke-linecap="round" opacity="0.8"/>
+        <!-- Soft Hair Strands -->
+        <path d="M68,100 Q62,130 66,155 M132,100 Q138,130 134,155" fill="none" stroke="#42291d" stroke-width="1.5"/>
+      ` 
+    },
+    { 
+      id: 'h2', name: '日系雙馬尾', icon: '👧', color: '#3a2b25', 
+      svg: `
+        <!-- Left Twin Tail -->
+        <path d="M66,78 C48,90 38,135 48,175 C58,150 62,110 74,86 Z" fill="#2c201b" />
+        <path d="M52,110 Q44,140 50,170" fill="none" stroke="#4a372f" stroke-width="2" />
+        <!-- Right Twin Tail -->
+        <path d="M134,78 C152,90 162,135 152,175 C142,150 138,110 126,86 Z" fill="#2c201b" />
+        <path d="M148,110 Q156,140 150,170" fill="none" stroke="#4a372f" stroke-width="2" />
+        <!-- Cute Ribbon Ties -->
+        <path d="M64,80 Q58,74 62,86 Z M136,80 Q142,74 138,86 Z" fill="#a64f60" />
+        <circle cx="65" cy="81" r="3" fill="#d99ea9"/>
+        <circle cx="135" cy="81" r="3" fill="#d99ea9"/>
+        <!-- Front Head Hair -->
+        <path d="M72,70 C68,50 132,50 128,70 C132,82 118,72 100,73 C82,72 68,82 72,70 Z" fill="#3a2b25" />
+        <path d="M80,68 Q100,74 120,68" stroke="#543e35" stroke-width="2" fill="none" />
+      ` 
+    },
+    { 
+      id: 'h3', name: '蜜桃波波短髮', icon: '👩', color: '#a66d5b', 
+      svg: `
+        <!-- Bob Shape -->
+        <path d="M72,66 C66,45 134,45 128,66 C136,85 136,115 126,126 C118,105 120,82 100,80 C80,82 82,105 74,126 C64,115 64,85 72,66 Z" fill="#a66d5b" />
+        <!-- Inner Hair Shadow -->
+        <path d="M74,102 Q70,118 76,124 M126,102 Q130,118 124,124" fill="none" stroke="#7a4b3d" stroke-width="2"/>
+        <!-- Hair Shine Crescent -->
+        <path d="M82,58 Q100,50 118,58" fill="none" stroke="#c98c79" stroke-width="2.5" stroke-linecap="round" />
+        <!-- Wispy Air Bangs -->
+        <path d="M88,68 L88,76 M100,68 L100,77 M112,68 L112,76" stroke="#7a4b3d" stroke-width="1.2" stroke-linecap="round"/>
+      ` 
+    }
+  ],
+  top: [
+    { 
+      id: 't1', name: '法式蕾絲襯衫', icon: '👚', 
+      svg: `
+        <!-- Main Blouse Sheer Layer -->
+        <path d="M70,118 L130,118 L125,178 L75,178 Z" fill="#ffffff" />
+        <path d="M70,118 Q62,150 66,182 L76,180 L76,122 Z" fill="#fcf8f5" />
+        <path d="M130,118 Q138,150 134,182 L124,180 L124,122 Z" fill="#fcf8f5" />
+        <!-- Frill Collar & Ruffles -->
+        <path d="M85,118 Q100,128 115,118 Q100,135 85,118" fill="#fcebe6" stroke="#e0b8ab" stroke-width="1" />
+        <!-- Velvet Ribbon Tie -->
+        <path d="M96,126 L100,132 L104,126 L108,138 L100,134 L92,138 Z" fill="#a64f60" />
+        <circle cx="100" cy="128" r="2.5" fill="#793848" />
+        <!-- Delicate Pearl Buttons & Creases -->
+        <circle cx="100" cy="146" r="1.8" fill="#e8d5c8" stroke="#a64f60" stroke-width="0.8"/>
+        <circle cx="100" cy="158" r="1.8" fill="#e8d5c8" stroke="#a64f60" stroke-width="0.8"/>
+        <circle cx="100" cy="170" r="1.8" fill="#e8d5c8" stroke="#a64f60" stroke-width="0.8"/>
+        <!-- Sleeve Lace Cuffs -->
+        <path d="M62,176 Q66,184 72,180 M128,180 Q134,184 138,176" stroke="#d9a89c" stroke-width="1.5" fill="none"/>
+      ` 
+    },
+    { 
+      id: 't2', name: '復古宮廷馬甲', icon: '🎽', 
+      svg: `
+        <!-- Corset Body -->
+        <path d="M72,118 L128,118 L122,172 Q100,182 78,172 Z" fill="#793848" />
+        <!-- Front Lace-up Ribbon Corset Lines -->
+        <path d="M88,118 L94,170 M112,118 L106,170" stroke="#54232f" stroke-width="1.5" />
+        <path d="M92,126 L108,132 M108,132 L92,138 M92,138 L108,144 M108,144 L92,150 M92,150 L108,156 M108,156 L92,162" stroke="#f0b6c2" stroke-width="1.2" fill="none" />
+        <!-- Sweetheart Neckline Trim -->
+        <path d="M72,118 C85,130 95,130 100,124 C105,130 115,130 128,118" fill="none" stroke="#d99ea9" stroke-width="2" />
+        <!-- Inner Shirt Sleeves -->
+        <path d="M64,120 Q60,145 68,162 L74,155 Z" fill="#fffaf5" />
+        <path d="M136,120 Q140,145 132,162 L126,155 Z" fill="#fffaf5" />
+      ` 
+    },
+    { 
+      id: 't3', name: '麻花針織毛衣', icon: '🧥', 
+      svg: `
+        <!-- Oversized Soft Knit Sweater Body -->
+        <path d="M66,118 L134,118 Q138,155 128,185 L72,185 Q62,155 66,118 Z" fill="#ba9b80" />
+        <!-- Chunky Knit Texture Lines -->
+        <path d="M86,120 Q84,152 86,184 M100,120 Q100,152 100,184 M114,120 Q116,152 114,184" stroke="#a08066" stroke-width="2.5" stroke-dasharray="4,3" fill="none" />
+        <!-- Soft Folded Ribbed Collar -->
+        <path d="M84,118 Q100,130 116,118 Q100,122 84,118" fill="#96775e" />
+        <!-- Slouchy Sleeves -->
+        <path d="M66,120 Q52,150 58,185 L70,182 Z" fill="#a08066" />
+        <path d="M134,120 Q148,150 142,185 L130,182 Z" fill="#a08066" />
+        <!-- Ribbed Hem -->
+        <path d="M72,182 L128,182 L128,188 L72,188 Z" fill="#8c6d56" />
+      ` 
+    }
+  ],
+  bottom: [
+    { 
+      id: 'b1', name: '英倫千鳥格裙', icon: '👗', 
+      svg: `
+        <!-- Pleated Skirt Silhouette -->
+        <path d="M74,168 L126,168 L138,232 Q100,240 62,232 Z" fill="#58392b" />
+        <!-- Houndstooth / Checkered Patterns -->
+        <path d="M62,232 L74,168 M74,235 L82,168 M88,237 L92,168 M100,238 L100,168 M112,237 L108,168 M126,235 L118,168 M138,232 L126,168" stroke="#3d251a" stroke-width="2" />
+        <path d="M68,185 Q100,190 132,185 M64,208 Q100,214 136,208" stroke="#3d251a" stroke-width="1.5" fill="none" />
+        <!-- Leather Belt Accent -->
+        <rect x="74" y="168" width="52" height="7" fill="#2c1a12" rx="1" />
+        <rect x="95" y="166" width="10" height="11" fill="url(#goldShimmer)" rx="1" />
+        <rect x="97" y="168" width="6" height="7" fill="#2c1a12" />
+      ` 
+    },
+    { 
+      id: 'b2', name: '粉嫩蓬蓬蕾絲裙', icon: '🩳', 
+      svg: `
+        <!-- Multi-layered Tutu Skirt -->
+        <path d="M74,168 L126,168 L142,225 Q100,235 58,225 Z" fill="#d99ea9" />
+        <!-- Inner White Petticoat Lace Edge -->
+        <path d="M56,223 Q62,233 70,225 Q78,235 86,225 Q94,235 102,225 Q110,235 118,225 Q126,235 134,225 Q140,233 144,223" fill="#ffffff" stroke="#f0b6c2" stroke-width="1" />
+        <!-- Soft Tulle Folds -->
+        <path d="M74,168 C70,195 64,220 64,220 M88,168 C86,195 82,222 82,222 M100,168 L100,224 M112,168 C114,195 118,222 118,222 M126,168 C130,195 136,220 136,220" stroke="#be7f8c" stroke-width="1.2" fill="none" />
+        <!-- Satin Ribbon Waistband -->
+        <rect x="74" y="168" width="52" height="6" fill="#a64f60" />
+        <path d="M94,174 L100,182 L106,174" fill="#a64f60" />
+      ` 
+    },
+    { 
+      id: 'b3', name: '復古高腰丹寧裙', icon: '👖', 
+      svg: `
+        <!-- High Waist Denim Skirt -->
+        <path d="M74,162 L126,162 L132,230 Q100,236 68,230 Z" fill="url(#denimGrad)" />
+        <!-- Contrast Yellow Stitching Details -->
+        <path d="M74,162 L126,162 M74,170 L126,170" stroke="#d4af37" stroke-width="1" stroke-dasharray="3,2" fill="none" />
+        <!-- Center Button Fly Line -->
+        <line x1="100" y1="162" x2="100" y2="232" stroke="#2b3a42" stroke-width="1.8" />
+        <circle cx="100" cy="176" r="2" fill="url(#goldShimmer)" />
+        <circle cx="100" cy="190" r="2" fill="url(#goldShimmer)" />
+        <circle cx="100" cy="204" r="2" fill="url(#goldShimmer)" />
+        <circle cx="100" cy="218" r="2" fill="url(#goldShimmer)" />
+        <!-- Front Curved Pockets -->
+        <path d="M74,175 Q84,175 86,188 M126,175 Q116,175 114,188" stroke="#d4af37" stroke-width="1" stroke-dasharray="2,1" fill="none" />
+      ` 
+    }
+  ],
+  socks: [
+    { 
+      id: 's1', name: '木耳邊蕾絲短襪', icon: '🧦', 
+      svg: `
+        <!-- Left Sock -->
+        <path d="M82,298 L94,298 L93,338 L81,338 Z" fill="#ffffff" />
+        <path d="M80,298 Q88,293 96,298 Q88,301 80,298" fill="#f2e3de" stroke="#d9bdaf" stroke-width="1" />
+        <line x1="82" y1="304" x2="94" y2="304" stroke="#a64f60" stroke-width="1" />
+        <!-- Right Sock -->
+        <path d="M106,298 L118,298 L117,338 L105,338 Z" fill="#ffffff" />
+        <path d="M104,298 Q112,293 120,298 Q112,301 104,298" fill="#f2e3de" stroke="#d9bdaf" stroke-width="1" />
+        <line x1="106" y1="304" x2="118" y2="304" stroke="#a64f60" stroke-width="1" />
+      ` 
+    },
+    { 
+      id: 's2', name: '黑色過膝絲襪', icon: '🧦', 
+      svg: `
+        <!-- Left Stocking -->
+        <path d="M82,238 L95,238 L93,340 L81,340 Z" fill="#18181a" opacity="0.92" />
+        <rect x="82" y="238" width="13" height="6" fill="#2c2c30" />
+        <!-- Right Stocking -->
+        <path d="M105,238 L118,238 L117,340 L105,340 Z" fill="#18181a" opacity="0.92" />
+        <rect x="105" y="238" width="13" height="6" fill="#2c2c30" />
+      ` 
+    },
+    { 
+      id: 's3', name: '裸足 / 隱形襪', icon: '🦶', svg: `` 
+    }
+  ],
+  accessory: [
+    { 
+      id: 'a1', name: '畫家貝雷帽', icon: '👒', 
+      svg: `
+        <!-- Slanted French Beret -->
+        <path d="M66,60 C64,32 134,32 138,54 C140,65 118,72 78,68 C68,67 66,63 66,60 Z" fill="#793848" />
+        <path d="M72,62 C85,67 115,67 132,58" fill="none" stroke="#54232f" stroke-width="2" />
+        <rect x="100" y="32" width="3" height="7" fill="#54232f" rx="1" />
+        <!-- Metal Logo Pin -->
+        <circle cx="82" cy="58" r="3.5" fill="url(#goldShimmer)" />
+        <circle cx="82" cy="58" r="2" fill="#793848" />
+      ` 
+    },
+    { 
+      id: 'a2', name: '珍珠蝴蝶結項鍊', icon: '🎀', 
+      svg: `
+        <!-- Pearl Strand -->
+        <path d="M88,118 Q100,128 112,118" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-dasharray="2.5,1.5" />
+        <!-- Velvet Ribbon Bow Center -->
+        <polygon points="100,123 93,118 93,128" fill="#a64f60" />
+        <polygon points="100,123 107,118 107,128" fill="#a64f60" />
+        <circle cx="100" cy="123" r="2" fill="url(#goldShimmer)" />
+      ` 
+    },
+    { 
+      id: 'a3', name: '無飾品', icon: '❌', svg: `` 
+    }
+  ]
+};
+
+const dollOutfit = { hair: 'h1', top: 't1', bottom: 'b1', socks: 's1', accessory: 'a1' };
+let currentTab = 'hair';
+
+function initDressupGame() {
+  renderTabItems();
+
+  document.querySelectorAll('#dressupTabs .dressup-tab').forEach(tab => {
+    tab.onclick = () => {
+      document.querySelectorAll('#dressupTabs .dressup-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      currentTab = tab.dataset.tab;
+      renderTabItems();
+    };
+  });
+
+  document.getElementById('snapPhotoBtn').onclick = snapPolaroid;
+  document.getElementById('randomOutfitsBtn').onclick = randomizeOutfits;
+  document.getElementById('closePolaroidBtn').onclick = () => {
+    document.getElementById('polaroidCard').classList.remove('show');
+  };
+
+  updateDollLayers();
+}
+
+function renderTabItems() {
+  const container = document.getElementById('itemsGrid');
+  container.innerHTML = '';
+
+  const items = WARDROBE[currentTab] || [];
+  items.forEach(item => {
+    const card = document.createElement('div');
+    card.className = 'item-card' + (dollOutfit[currentTab] === item.id ? ' active' : '');
+    card.innerHTML = `<span class="item-icon">${item.icon}</span><span>${item.name}</span>`;
+    card.onclick = () => {
+      dollOutfit[currentTab] = item.id;
+      renderTabItems();
+      updateDollLayers();
+    };
+    container.appendChild(card);
+  });
+}
+
+function updateDollLayers() {
+  // Update Clothing SVGs
+  ['hair', 'top', 'bottom', 'socks', 'accessory'].forEach(cat => {
+    const layerEl = document.getElementById(`layer-${cat}`);
+    const selectedItem = WARDROBE[cat].find(i => i.id === dollOutfit[cat]);
+    layerEl.innerHTML = selectedItem ? selectedItem.svg : '';
+  });
+
+  // Dynamically Render Shoes Layer matched with Current 3D Design State!
+  const shoesLayer = document.getElementById('layer-shoes');
+  const upperColor = state.colors.upper;
+  const soleColor = state.colors.sole;
+  const strapColor = state.colors.strap;
+  const buckleColor = state.colors.buckle;
+
+  shoesLayer.innerHTML = `
+    <!-- Left Shoe -->
+    <g transform="translate(-1, 0)">
+      <!-- Sole Shadow & Platform Base -->
+      <path d="M78,336 L96,336 L95,343 L79,343 Z" fill="${soleColor}" />
+      <!-- Upper Body Shell -->
+      <path d="M78,328 C78,320 84,318 95,318 C98,318 99,336 96,337 L78,337 Z" fill="${upperColor}" />
+      <!-- Inner Tan Cushion Opening -->
+      <ellipse cx="86" cy="322" rx="6" ry="2" fill="#cbb292" />
+      <!-- Double Straps -->
+      <line x1="80" y1="324" x2="92" y2="324" stroke="${strapColor}" stroke-width="2.2" stroke-linecap="round" />
+      <line x1="81" y1="329" x2="93" y2="329" stroke="${strapColor}" stroke-width="2.2" stroke-linecap="round" />
+      <!-- Metallic Buckles -->
+      <circle cx="91" cy="324" r="1.8" fill="${buckleColor}" />
+      <circle cx="92" cy="329" r="1.8" fill="${buckleColor}" />
+    </g>
+
+    <!-- Right Shoe -->
+    <g transform="translate(1, 0)">
+      <!-- Sole Shadow & Platform Base -->
+      <path d="M104,336 L122,336 L121,343 L105,343 Z" fill="${soleColor}" />
+      <!-- Upper Body Shell -->
+      <path d="M104,328 C104,320 110,318 121,318 C124,318 125,336 122,337 L104,337 Z" fill="${upperColor}" />
+      <!-- Inner Tan Cushion Opening -->
+      <ellipse cx="112" cy="322" rx="6" ry="2" fill="#cbb292" />
+      <!-- Double Straps -->
+      <line x1="106" y1="324" x2="118" y2="324" stroke="${strapColor}" stroke-width="2.2" stroke-linecap="round" />
+      <line x1="107" y1="329" x2="119" y2="329" stroke="${strapColor}" stroke-width="2.2" stroke-linecap="round" />
+      <!-- Metallic Buckles -->
+      <circle cx="117" cy="324" r="1.8" fill="${buckleColor}" />
+      <circle cx="118" cy="329" r="1.8" fill="${buckleColor}" />
+    </g>
+  `;
+
+  // Trigger gentle Bounce Animation on Doll Canvas
+  const dollCanvas = document.querySelector('.doll-canvas-wrap svg');
+  if (dollCanvas) {
+    dollCanvas.style.transform = 'scale(1.03) translateY(-4px)';
+    setTimeout(() => { dollCanvas.style.transform = 'none'; }, 250);
+  }
+}
+
+function randomizeOutfits() {
+  Object.keys(WARDROBE).forEach(cat => {
+    const list = WARDROBE[cat];
+    dollOutfit[cat] = list[Math.floor(Math.random() * list.length)].id;
+  });
+  renderTabItems();
+  updateDollLayers();
+  showToast('🎲 已自動組合全新穿搭靈感！');
+}
+
+function snapPolaroid() {
+  const polaroidCard = document.getElementById('polaroidCard');
+  const shotContainer = document.getElementById('polaroidShot');
+  const caption = document.getElementById('polaroidCaption');
+  const score = document.getElementById('polaroidScore');
+
+  // Clone doll SVG into polaroid frame
+  const svgContent = document.getElementById('dollSvg').outerHTML;
+  shotContainer.innerHTML = svgContent;
+
+  const styleTitles = ['French Vintage Girl', 'Sweet Romance', 'Tokyo Street Chic', 'Cozy Afternoon'];
+  const randomTitle = styleTitles[Math.floor(Math.random() * styleTitles.length)];
+  const randomScore = 95 + Math.floor(Math.random() * 6);
+
+  caption.textContent = randomTitle;
+  score.textContent = `Style Score: ${randomScore}/100 ♡`;
+
+  polaroidCard.classList.add('show');
+}
+
+function showToast(msg) {
+  const toast = document.getElementById('toast');
+  toast.textContent = msg;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 2500);
+}
+</script>
+</body>
+</html>
